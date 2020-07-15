@@ -39,6 +39,32 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            // 处理图片
+            {
+                test:/\.(png|jpg|jpeg|gif)$/,//匹配需要处理的文件
+                use:{
+                    loader:'file-loader',
+                    options:{
+                        name:'[name]-[hash].[ext]',//处理文件名 name就是文件名,hase是hase,ext是后缀
+                        //context:'',//webpack的上下文
+                        //publicPath:'',//文件public发布目录=>也是就是说这个属性设置的是发布后的文件路径比如:www.baidu.com/img/
+                        outputPath:'image',//自定义output输出目录=>打包后的文件目录
+                    }
+                } // 使用file-loader
+            },
+            // 处理字体文件
+            {
+                test:/\.(ttf|woff|woff2|eot|svg)$/,//匹配需要处理的文件
+                use:{
+                    loader:'file-loader',
+                    options:{
+                        name:'[name]-[hash].[ext]',//处理文件名 name就是文件名,hase是hase,ext是后缀
+                        //context:'',//webpack的上下文
+                        //publicPath:'',//文件public发布目录=>也是就是说这个属性设置的是发布后的文件路径比如:www.baidu.com/img/
+                        outputPath:'font',//自定义output输出目录=>打包后的文件目录
+                    }
+                } // 使用file-loader
             }
         ]
     },
