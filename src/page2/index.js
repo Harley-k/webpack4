@@ -1,1 +1,1 @@
-console.log('page2')
+console.log('测试')
