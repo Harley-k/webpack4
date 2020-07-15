@@ -1,0 +1,7 @@
+body{
+    background-color: aquamarine;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-image: url(image/QQ20200716-053606@2x-1cf7454a00cec2361df9e0984ace0f3e.png);
+}
