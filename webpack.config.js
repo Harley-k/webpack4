@@ -21,5 +21,16 @@ module.exports={
         host:'localhost',//服务器ip地址,
         port:8080,//端口号
         open:true //自动打开页面
+    },
+    module:{ 
+        rules:[ //loader
+            {
+                test:/\.css$/, //这是一个正则,匹配到要处理的文件
+                use:[ //匹配到的文件使用哪个loader,这里使用了两个,注意要把style-loader丢在前面
+                    'style-loader',
+                    'css-loader'
+                ]
+            }
+        ]
     }
 }
