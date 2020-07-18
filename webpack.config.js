@@ -1,6 +1,12 @@
 const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const miniCss = require('mini-css-extract-plugin')
+
+function _resolve(dir){
+    return path.join(__dirname,'..',dir)
+}
+// console.log(_resolve('test'))
+
 module.exports = {
     // 入口文件
     entry: './src/index.js', //单入单出
@@ -13,17 +19,29 @@ module.exports = {
     // 输出文件
     output: {
         // 输出路径
-        path: path.resolve(__dirname, 'dist'),
+        path: _resolve('dist'),
         // 输出文件名
         filename: 'index-[hash].js' //单出口配置
         // filename:'[name].js'//多出口配置
     },
     devServer: {
-        contentBase: './dist',//服务器访问目录
+        contentBase: _resolve('dist'),//服务器访问目录
         host: 'localhost',//服务器ip地址,
         port: 9090,//端口号
-        open: true //自动打开页面
+        open: false //自动打开页面
     },
+    resolve: {
+        // 尽可能减少查找后缀的可能性
+        extensions: ['js', 'css'],
+        modules: [
+            _resolve('src'),
+            _resolve('node_modules'),
+        ],
+        alias:{
+            '@':_resolve('src')
+        }
+    },
+
     module: {
         rules: [ //loader
             {
@@ -41,7 +59,7 @@ module.exports = {
 
                         }
                     },
-                    
+
                 ]
             },
             // 处理图片
@@ -84,11 +102,16 @@ module.exports = {
                 removeScriptTypeAttributes: false,//去除js类型属性
                 removeStyleLinkTypeAttributes: true,//去除css类型属性
             },
-            has:true //引入生成资源的时候加入hash避免缓存
+            has: true //引入生成资源的时候加入hash避免缓存
         }),
         new miniCss({
-            filename:'./css/[name]-[hash].css'
+            filename: './css/[name]-[hash].css'
         })
-    ]
+    ],
+    // resolve:{
+
+    // },
+
 
 }
+
